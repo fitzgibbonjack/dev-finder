@@ -252,7 +252,7 @@ a {
   outline: none;
 }
 .search-area span {
-  background-color: white;
+  background-color: var(--clr-card-bg);
   position: absolute;
   right: 100px;
   padding-left: 10px;
