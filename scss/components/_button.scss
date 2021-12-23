@@ -1,0 +1,20 @@
+.button {
+    width: 6em;
+    height: 3.285em;
+    margin: 0.5em;
+    border-radius: 10px;
+    background-color: var(--clr-highlight);
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #60ABFF;
+    }
+
+    @media (min-width: 48em) {
+        width: 6.6em;
+        height: 3.1em;
+        margin: 0.65rem;
+    }
+}
+

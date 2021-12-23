@@ -1,0 +1,147 @@
+body {
+    background-color: var(--clr-main-bg);
+}
+
+main {
+    padding: 40px 6.4%;
+}
+
+header {
+    margin-bottom: 35px;
+}
+
+// search bar
+.search-area,
+.profile-card {
+    background-color: var(--clr-card-bg);
+    border-radius: 15px;
+    box-shadow: 0 16px 30px -10px rgba(70, 96, 187, 0.198567);
+}
+
+// profile card
+.profile-card {
+    padding: 31px 7.34%;
+    margin-top: 37px;
+
+    img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+    }
+
+    .bio {
+        margin-top: 30px;
+    }
+
+    .stats {
+        padding: 19px 4.58%;
+        margin-top: 22px;
+        background-color: var(--clr-main-bg);
+        border-radius: 10px;
+        text-align: center;
+
+        > div { width: calc(100%/3); }
+
+        p { margin-top: 9px; }
+    }
+
+    .links {
+        margin-top: 18px;
+
+        p { display: inline; }
+        a:hover { text-decoration: underline; }
+
+        > div {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            a,
+            p {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 80%;
+            }
+            
+            svg { 
+                margin-right: 13px;
+                fill: var(--clr-text); 
+            }
+        }
+    }
+}
+
+// media queries
+@media (min-width: 48em) {
+    main {
+        padding: 100px 12.63%;
+    }
+
+    .profile-card {
+        padding: 31px 7.34% 23px 7.34%;
+
+        img {
+            width: 72%;
+            max-width: 135px;
+            height: auto;
+            margin-top: 11px;
+        }
+
+        .header-text {
+            margin-top: 21px;
+            h3, p {
+                margin-top: 3px;
+            }
+        }
+
+        .bio {
+            margin-top: 22px;
+        }
+
+        .stats {
+            margin-top: 32px;
+            text-align: left;
+            padding: 15px 6% 20px 6%;
+
+            p { margin-top: 5px; }
+        }
+
+        .links {
+            margin-top: 30px;
+            height: 80px;
+        }
+    }
+}
+
+@media (min-width: 90em) {
+    main {
+        padding: 100px 24.6%;
+    }
+    .profile-card {
+        padding: 37px 6.57% 31px 6.57%;
+
+        .header-text {
+            margin-top: 7px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            height: 70px;
+
+            p {
+                text-align: right;
+                margin-top: 7px;
+            }
+        }
+        .bio {
+            margin-top: 5px;
+        }
+        .stats {
+            margin-top: 20px;
+        }
+        .links {
+            margin-top: 37px;
+        }
+    }
+}

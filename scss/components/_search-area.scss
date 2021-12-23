@@ -1,0 +1,44 @@
+.search-area {
+    margin-top: 16px;
+    position: relative;
+
+    svg {
+        margin: 21px 2.75% 20px 16px;
+
+        path { transform: scale(0.8); }
+    }
+    input {
+        height: 3.285em;
+        flex-grow: 1;
+        background-color: var(--clr-card-bg);
+        border: none;
+
+        &:focus { outline: none; }
+    }
+    span {
+        background-color: white; 
+        position: absolute;
+        right: 100px;
+        padding-left: 10px;
+        display: none;
+    }
+}
+
+// media queries
+@media (min-width: 48em) {
+    .search-area {
+        margin: 16px 0 24px 0;
+
+        svg {
+            width: 24px;
+            height: 24px;
+            margin: 21px 24px 20px 34px;
+
+            path { transform: scale(1); }
+        }
+
+        .error-msg {
+            right: 130px;
+        }
+    }
+}

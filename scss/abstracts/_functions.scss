@@ -1,0 +1,7 @@
+@function rem($pixels) {
+    @return ($pixels/16) * 1rem;
+}
+
+@function px-to-pct($pixels, $design-width : 375) {
+    @return (($pixels/$design-width) * 100%);
+}

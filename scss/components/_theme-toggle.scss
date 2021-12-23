@@ -1,0 +1,19 @@
+button.theme-toggle {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+
+    path { fill: var(--clr-text); }
+
+    svg {
+        vertical-align: middle;
+        margin-left: 16px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        color: var(--clr-toggle-hover);
+        path { fill: var(--clr-toggle-hover); }
+    }
+}

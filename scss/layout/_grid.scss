@@ -1,0 +1,47 @@
+.profile-card {
+    // grid area names
+    img {
+        grid-area: img;
+    }
+    .header-text {
+        grid-area: header-text;
+    }
+    .bio {
+        grid-area: profile-text;
+    }
+    .stats {
+        grid-area: stats;
+    }
+    .links {
+        grid-area: links;
+    }
+
+    display: grid;
+    grid-template-columns: 1fr 2.1fr;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: 
+        "img header-text"
+        "profile-text profile-text"
+        "stats stats"
+        "links links";
+}
+
+// media queries
+@media (min-width: 48em) {
+    .links {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 1.25fr 1fr;
+        grid-template-rows: repeat(2, 40px);
+    }
+}
+@media (min-width: 90em) {
+    .profile-card {
+        grid-template-columns: 0.64fr 2fr;
+        grid-template-areas: 
+            "img header-text"
+            "img profile-text"
+            ". stats"
+            ". links";
+    }
+}
