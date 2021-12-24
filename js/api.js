@@ -12,11 +12,12 @@ function handleErrors(response) {
 
 // fetches data from api for given username
 function fetchData(username) {
-    return fetch(`https://api.github.com/users/${username}`)
+    return fetch(`https://api.github.com/users/`+username)
         .then(handleErrors)
         .then(result => result.json())
         .then(data => renderData(data))
         .catch(error => errorMsg.setAttribute('style', 'display: inline'));
+        
 }
 
 // search button - on click fetch data for specified username
@@ -25,7 +26,7 @@ searchButton.addEventListener('click', function() {
 });
 
 // if enter key pressed, click search button
-searchField.addEventListener('keydown', function(event){
+searchField.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
         searchButton.click();
     }
@@ -68,50 +69,66 @@ function renderData(data) {
     document.querySelector('.followers p').innerHTML = data.followers;
     document.querySelector('.following p').innerHTML = data.following;
 
-    // render location
+    // render links section
     const location = document.querySelector('.location p');
     if (data.location == null || data.location == '') {
         location.innerHTML = 'Not Available';
         location.parentNode.classList.add('unavailable');
+    } else if (location.parentElement.classList.contains('unavailable')) {
+        location.parentNode.classList.remove('unavailable');
+        location.innerHTML = data.location;
     } else {
         location.innerHTML = data.location;
     }
 
-    // render links section
-    const website = document.querySelector('.website a');
+    const website = document.querySelector('.website span').firstChild;
     if (data.blog == null || data.blog == '') {
         const para = document.createElement('p');
         para.appendChild(document.createTextNode('Not Available'));
-        website.parentNode.classList.add('unavailable');
+        document.querySelector('.website').classList.add('unavailable');
         website.parentNode.replaceChild(para, website);
     } else {
-        website.innerHTML = data.blog;
-        website.setAttribute('href', data.blog);
+        if (website.tagName == 'P') {
+            const anchor = document.createElement('a');
+            anchor.appendChild(document.createTextNode(data.blog));
+            website.parentNode.replaceChild(anchor, website);
+            document.querySelector('.website').classList.remove('unavailable');
+            document.querySelector('.website span a').href = data.blog;
+        } else if (website.tagName == 'A') {
+            website.innerHTML = data.blog;
+            website.href = data.blog;
+        }
     }
 
-    const twitter = document.querySelector('.twitter a');
+    const twitter = document.querySelector('.twitter span').firstChild;
     if (data.twitter_username == null || data.twitter_username == '') {
         const para = document.createElement('p');
         para.appendChild(document.createTextNode('Not Available'));
-        twitter.parentNode.classList.add('unavailable');
+        document.querySelector('.twitter').classList.add('unavailable');
         twitter.parentNode.replaceChild(para, twitter);
     } else {
-        twitter.innerHTML = data.twitter_username;
-        twitter.setAttribute('href', `http://twitter.com/${data.twitter_username}`);
+        if (twitter.tagName == 'P') {
+            const anchor = document.createElement('a');
+            anchor.appendChild(document.createTextNode(data.twitter_username));
+            twitter.parentNode.replaceChild(anchor, twitter);
+            document.querySelector('.twitter').classList.remove('unavailable');
+            document.querySelector('.twitter span a').href = 'http://twitter.com/'+data.twitter_username;
+        } else if (twitter.tagName == 'A') {
+            twitter.innerHTML = data.twitter_username;
+            twitter.href = 'http://twitter.com/'+data.twitter_username;
+        }
     }
 
-    const company = document.querySelector('.company a');
+    const company = document.querySelector('.company p');
     if (data.company == null || data.company == '') {
         const para = document.createElement('p');
         para.appendChild(document.createTextNode('Not Available'));
         company.parentNode.classList.add('unavailable');
         company.parentNode.replaceChild(para, company);
-    } else {
+    } else if (company.parentElement.classList.contains('unavailable')) {
+        company.parentNode.classList.remove('unavailable');
         company.innerHTML = data.company;
-        company.setAttribute('href', data.company);
+    } else {
+        location.innerHTML = data.company;
     }
 }
-
-
-
-
