@@ -337,7 +337,7 @@ body {
 }
 
 main {
-  padding: 40px 6.4%;
+  padding: 32px 6.4%;
 }
 
 header {
@@ -386,7 +386,7 @@ header {
   text-decoration: underline;
 }
 .profile-card .links > div {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -405,11 +405,12 @@ header {
 
 @media (min-width: 48em) {
   main {
-    padding: 100px 12.63%;
+    padding: 60px 12.63%;
   }
 
   .profile-card {
     padding: 31px 7.34% 23px 7.34%;
+    margin-top: 0;
   }
   .profile-card img {
     width: 72%;
@@ -441,7 +442,7 @@ header {
 }
 @media (min-width: 90em) {
   main {
-    padding: 100px 24.6%;
+    padding: 144px 24.6%;
   }
 
   .profile-card {
@@ -456,7 +457,7 @@ header {
   }
   .profile-card .header-text p {
     text-align: right;
-    margin-top: 7px;
+    margin-top: 16px;
   }
   .profile-card .bio {
     margin-top: 5px;
