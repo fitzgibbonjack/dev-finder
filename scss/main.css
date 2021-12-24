@@ -101,6 +101,7 @@ h1 {
 h3 {
   font-size: 0.8125rem;
   line-height: 1.5rem;
+  font-weight: normal;
   color: var(--clr-highlight);
 }
 
@@ -202,13 +203,13 @@ a {
   font-weight: bold;
 }
 
-.unavailable a {
+#main .unavailable {
   color: var(--clr-unavailable);
 }
-.unavailable p {
+#main .unavailable a, #main .unavailable p {
   color: var(--clr-unavailable);
 }
-.unavailable svg path {
+#main .unavailable svg path {
   fill: var(--clr-unavailable);
 }
 
@@ -251,10 +252,11 @@ a {
 .search-area input:focus {
   outline: none;
 }
-.search-area span {
+.search-area .error-msg {
   background-color: var(--clr-card-bg);
   position: absolute;
   right: 100px;
+  padding: 1em 0 1em 10px;
   padding-left: 10px;
   display: none;
 }
@@ -392,6 +394,7 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.profile-card .links > div span,
 .profile-card .links > div a,
 .profile-card .links > div p {
   text-overflow: ellipsis;
@@ -400,6 +403,8 @@ header {
 }
 .profile-card .links > div svg {
   margin-right: 13px;
+}
+.profile-card .links > div svg path {
   fill: var(--clr-text);
 }
 
@@ -430,7 +435,7 @@ header {
   .profile-card .stats {
     margin-top: 32px;
     text-align: left;
-    padding: 15px 6% 20px 6%;
+    padding: 20px 6%;
   }
   .profile-card .stats p {
     margin-top: 5px;
@@ -442,7 +447,7 @@ header {
 }
 @media (min-width: 90em) {
   main {
-    padding: 144px 24.6%;
+    padding: 60px 24.6%;
   }
 
   .profile-card {
@@ -460,7 +465,7 @@ header {
     margin-top: 16px;
   }
   .profile-card .bio {
-    margin-top: 5px;
+    margin-top: 8px;
   }
   .profile-card .stats {
     margin-top: 20px;

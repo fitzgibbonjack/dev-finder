@@ -15,10 +15,11 @@
 
         &:focus { outline: none; }
     }
-    span {
+    .error-msg {
         background-color: var(--clr-card-bg); 
         position: absolute;
         right: 100px;
+        padding: 1em 0 1em 10px;
         padding-left: 10px;
         display: none;
     }

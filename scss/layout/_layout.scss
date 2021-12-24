@@ -58,6 +58,7 @@ header {
             overflow: hidden;
             text-overflow: ellipsis;
 
+            span,
             a,
             p {
                 text-overflow: ellipsis;
@@ -67,7 +68,7 @@ header {
             
             svg { 
                 margin-right: 13px;
-                fill: var(--clr-text); 
+                path {fill: var(--clr-text);}
             }
         }
     }
@@ -104,7 +105,7 @@ header {
         .stats {
             margin-top: 32px;
             text-align: left;
-            padding: 15px 6% 20px 6%;
+            padding: 20px 6%;
 
             p { margin-top: 5px; }
         }
@@ -118,7 +119,7 @@ header {
 
 @media (min-width: 90em) {
     main {
-        padding: 144px 24.6%;
+        padding: 60px 24.6%;
     }
     .profile-card {
         padding: 37px 6.57% 31px 6.57%;
@@ -136,7 +137,7 @@ header {
             }
         }
         .bio {
-            margin-top: 5px;
+            margin-top: 8px;
         }
         .stats {
             margin-top: 20px;

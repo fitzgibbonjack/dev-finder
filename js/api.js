@@ -2,6 +2,43 @@ const searchButton = document.querySelector('.search-area button');
 const searchField = document.querySelector('.search-area input');
 const errorMsg = document.querySelector('.search-area span');
 
+/* ---------------------------- 
+------ HELPER FUNCTIONS -------
+----------------------------- */
+
+function formatDate(dateInput) { 
+    let date = new Date(dateInput).toDateString();
+    return date.split(' ').slice(1).join(' '); 
+}
+
+const createPara = (field, textNode) => {
+    const p = document.createElement('p');
+    p.appendChild(document.createTextNode(`${textNode}`));
+    field.parentElement.replaceChild(p, field);
+}
+
+const createAnchor = (field, textNode) => {
+    const a = document.createElement('a');
+    a.appendChild(document.createTextNode(`${textNode}`));
+    field.parentElement.replaceChild(a, field);
+}
+
+const renderPara = (field, data, textNode = 'Not Available') => {
+    if (data == null || data == '') {
+        field.innerHTML = `${textNode}`;
+        field.parentNode.classList.add('unavailable');
+    } else if (field.parentElement.classList.contains('unavailable')) {
+        field.innerHTML = data;
+        field.parentNode.classList.remove('unavailable');
+    } else {
+        field.innerHTML = data;
+    }
+}
+
+/* ---------------------------- 
+------ API FUNCTIONS ---------
+----------------------------- */
+
 // if http response code not in sucessful range, throws error
 function handleErrors(response) {
     if (!response.ok) {
@@ -20,7 +57,11 @@ function fetchData(username) {
         
 }
 
-// search button - on click fetch data for specified username
+/* ---------------------------- 
+------ SEARCH BUTTON ----------
+----------------------------- */
+
+// on click fetch data for specified username
 searchButton.addEventListener('click', function() {
     fetchData(searchField.value);
 });
@@ -32,9 +73,11 @@ searchField.addEventListener('keydown', function(event) {
     }
 });
 
-// function to render data
-function renderData(data) {
+/* ---------------------------- 
+------ RENDER FUNCTION- -------
+----------------------------- */
 
+function renderData(data) {
     // removes error message incase visible from previous search
     errorMsg.setAttribute('style', ''); 
 
@@ -51,18 +94,14 @@ function renderData(data) {
     }
 
     // render username
-    const username = document.querySelector('.header-text h3');
-    username.innerHTML = data.login;
+    document.querySelector('.header-text h3').innerHTML = data.login;
 
-    let joinDate = new Date(data.created_at).toDateString();
-    document.querySelector('.header-text p').innerHTML = `Joined ${joinDate.split(' ').slice(1).join(' ')}`;
+    // render join date
+    document.getElementById('join-date').innerHTML = `Joined ${formatDate(data.created_at)}`;
 
-    const bio = document.querySelector('.bio');
-    if (data.bio == null || data.bio == '') {
-        bio.innerHTML = 'This profile has no bio';
-    } else {
-        bio.innerHTML = data.bio;
-    }
+    // render bio
+    const bio = document.querySelector('.bio p');
+    renderPara(bio, data.bio, 'This profile has no bio');
     
     // render stats section
     document.querySelector('.repos p').innerHTML = data.public_repos;
@@ -71,64 +110,36 @@ function renderData(data) {
 
     // render links section
     const location = document.querySelector('.location p');
-    if (data.location == null || data.location == '') {
-        location.innerHTML = 'Not Available';
-        location.parentNode.classList.add('unavailable');
-    } else if (location.parentElement.classList.contains('unavailable')) {
-        location.parentNode.classList.remove('unavailable');
-        location.innerHTML = data.location;
-    } else {
-        location.innerHTML = data.location;
-    }
+    renderPara(location, data.location);
 
-    const website = document.querySelector('.website span').firstChild;
+    let website = document.querySelector('.website span').firstChild;
     if (data.blog == null || data.blog == '') {
-        const para = document.createElement('p');
-        para.appendChild(document.createTextNode('Not Available'));
+        createPara(website, 'Not Available');
         document.querySelector('.website').classList.add('unavailable');
-        website.parentNode.replaceChild(para, website);
-    } else {
-        if (website.tagName == 'P') {
-            const anchor = document.createElement('a');
-            anchor.appendChild(document.createTextNode(data.blog));
-            website.parentNode.replaceChild(anchor, website);
-            document.querySelector('.website').classList.remove('unavailable');
-            document.querySelector('.website span a').href = data.blog;
-        } else if (website.tagName == 'A') {
-            website.innerHTML = data.blog;
-            website.href = data.blog;
-        }
+    } else if (website.tagName == 'P') {
+        createAnchor(website, data.blog);
+        website = document.querySelector('.website span').firstChild;
+        document.querySelector('.website').classList.remove('unavailable');
+        website.href = data.blog;
+    } else if (website.tagName == 'A') {
+        website.innerHTML = data.blog;
+        website.href = data.blog;
     }
 
-    const twitter = document.querySelector('.twitter span').firstChild;
+    let twitter = document.querySelector('.twitter span').firstChild;
     if (data.twitter_username == null || data.twitter_username == '') {
-        const para = document.createElement('p');
-        para.appendChild(document.createTextNode('Not Available'));
+        createPara(twitter, 'Not Available');
         document.querySelector('.twitter').classList.add('unavailable');
-        twitter.parentNode.replaceChild(para, twitter);
-    } else {
-        if (twitter.tagName == 'P') {
-            const anchor = document.createElement('a');
-            anchor.appendChild(document.createTextNode(data.twitter_username));
-            twitter.parentNode.replaceChild(anchor, twitter);
-            document.querySelector('.twitter').classList.remove('unavailable');
-            document.querySelector('.twitter span a').href = 'http://twitter.com/'+data.twitter_username;
-        } else if (twitter.tagName == 'A') {
-            twitter.innerHTML = data.twitter_username;
-            twitter.href = 'http://twitter.com/'+data.twitter_username;
-        }
+    } else if (twitter.tagName == 'P') {
+        createAnchor(twitter, data.twitter_username);
+        twitter = document.querySelector('.twitter span').firstChild;
+        document.querySelector('.twitter').classList.remove('unavailable');
+        twitter.href = 'http://twitter.com/'+data.twitter_username;
+    } else if (twitter.tagName == 'A') {
+        twitter.innerHTML = data.twitter_username;
+        twitter.href = 'http://twitter.com/'+data.twitter_username;
     }
 
     const company = document.querySelector('.company p');
-    if (data.company == null || data.company == '') {
-        const para = document.createElement('p');
-        para.appendChild(document.createTextNode('Not Available'));
-        company.parentNode.classList.add('unavailable');
-        company.parentNode.replaceChild(para, company);
-    } else if (company.parentElement.classList.contains('unavailable')) {
-        company.parentNode.classList.remove('unavailable');
-        company.innerHTML = data.company;
-    } else {
-        location.innerHTML = data.company;
-    }
+    renderPara(company, data.company);
 }
