@@ -21,8 +21,7 @@
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://fitzgibbonjack.github.io/dev-finder/](https://fitzgibbonjack.github.io/dev-finder/)
 
 ## My process
 
@@ -40,10 +39,3 @@
 - JS Fetch()
 - localStroage to remember last used colour scheme
 - prefers-color-scheme
-
-
-### Continued development
-
-- finish desktop responsive state
-
-## Acknowledgments
